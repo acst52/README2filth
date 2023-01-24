@@ -17,7 +17,7 @@ Because this application won’t be deployed, you’ll also need to provide a li
 
 
 ### User Story
-md```
+```md
 AS A developer
 I WANT a README generator
 SO THAT I can quickly create a professional README for a new project
