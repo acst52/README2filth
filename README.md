@@ -1,7 +1,9 @@
 # README2filth
 Command Line App: Professional README Generator, from user input using the Inquirer pkg!
 
-	
+IMPORTANT
+In order to install inquirer, please use npm i inquirer@8.2.4.
+
 ## Node.js Challenge: Professional README Generator
 When creating an open source project on GitHub, it’s important to have a high-quality README for the app. This should include what the app is for, how to use the app, how to install it, how to report issues, and how to make contributions—this last part increases the likelihood that other developers will contribute to the success of the project.
 
@@ -45,15 +47,15 @@ THEN I am taken to the corresponding section of the README
 Getting Started
 Here are some guidelines to help you get started:
 
-Create a .gitignore file and include node_modules/ and .DS_Store/ so that your node_modules directory isn't tracked or uploaded to GitHub. Be sure to create your .gitignore file before installing any npm dependencies.
+- Create a .gitignore file and include node_modules/ and .DS_Store/ so that your node_modules directory isn't tracked or uploaded to GitHub. Be sure to create your .gitignore file before installing any npm dependencies.
 
-Make sure that your repo includes a package.json with the required dependencies. You can create one by running npm init when you first set up the project, before installing any dependencies.
+- Make sure that your repo includes a package.json with the required dependencies. You can create one by running npm init when you first set up the project, before installing any dependencies.
 
-Include a video of the typical user flow through your application. This includes views of the prompts and the responses after their selection.
+- Include a video of the typical user flow through your application. This includes views of the prompts and the responses after their selection.
 
-Include any other screenshots you deem necessary to help someone who has never been introduced to your application understand the purpose and function of it. This is how you will communicate to potential employers or other developers in the future what you built and why, and to show how it works.
+- Include any other screenshots you deem necessary to help someone who has never been introduced to your application understand the purpose and function of it. This is how you will communicate to potential employers or other developers in the future what you built and why, and to show how it works.
 
-Refer to the Video Submission Guide on the Full-Stack Blog for additional guidance on creating a video.
+- Refer to the Video Submission Guide on the Full-Stack Blog for additional guidance on creating a video.
 
 ## Grading Requirements
 
