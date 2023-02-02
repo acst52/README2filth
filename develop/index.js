@@ -1,22 +1,13 @@
+// TODO:
+  // 1. generateMarkdown.js file + TOC
+  // 2. Get license icon to appear + add more licenses to [choices]
+  // 3. Email address validation
+  // 4. Esthetics
 
 const inquirer = require('inquirer');
 const fs = require('fs');
-
-var licenseChoices = [ // add description here??
-  {
-    name: "MIT License",
-    value: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
-  },
-  {
-    name: "Apache License 2.0",
-    value: "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"
-  },
-  {
-    name: "GPL License",
-    value: "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)"
-  }
-];
-
+const path = require('path');
+const generateMarkdown = require('./utils/generateMarkdown')
 
 const questions = [
   {
@@ -30,12 +21,13 @@ const questions = [
     message: 'Describe your application; be sure to include what the app is for!'
   },
   {
-    type: 'editor',
+    type: 'input',
     name: 'installation',
-    message: 'What are the installation instructions? List them here:'
+    message: 'What command should be run to install necessary dependencies?',
+    default: 'npm i'
   },
   {
-    type: 'editor',
+    type: 'input',
     name: 'usage',
     message: 'How do users use your application? List or describe usage info here:'
   },
@@ -43,7 +35,7 @@ const questions = [
     type: 'list',
     name: 'license',
     message: 'Pick the license you want to use from the list:',
-    choices: licenseChoices
+    choices: ['MIT', 'Apache 2.0', 'GPL 3.0', 'BSD3', 'none']
   },
   {
     type: 'editor',
@@ -51,9 +43,10 @@ const questions = [
     message: 'What contribution guidelines do you want users to follow (ex: fork repo)?'
   },
   {
-    type: 'editor',
+    type: 'input',
     name: 'tests',
-    message: 'What test instructions do you want to relay to users?'
+    message: 'What command should be used to run tests?',
+    default: 'npm test'
   },
   {
     type: 'input',
@@ -69,27 +62,23 @@ const questions = [
         if (emailRegex.test(input)) {
           return true;
         }
-        return 'Please enter a valid email address.';
+        return 'Error in your email address!';
       }
   }
 ];
 
+// Create a function to write README file
+function writeToFile(fileName, data) {
+  return fs.writeFileSync(path.join(process.cwd(), fileName), data); // general set up - new file is joining whats in this current dir with a specified file
+}
 
-inquirer.prompt(questions).then(answers => {
-  let data = '';
-  data += answers.title + '\n\n';
-  data += '#Description \n' + answers.description + '\n\n'; // add license badge here?????
-  data += '#Installation \n' + answers.installation + '\n\n';
-  data += '#Usage \n' + answers.usage + '\n\n';
-  // data += '#License \n' + answers.*** + '\n\n'; // need to get descripts of licenses and add to this section***
-  data += '#Contributing \n' + answers.contributing + '\n\n';
-  data += '#Tests \n' + answers.tests + '\n\n';
-        // write GitHub username to file, linking to their page:
-  data += '#Contact Me \n' + '[Visit my GitHub](https://github.com/' + answers.githubUser + ')\n\n' 
-        // email:
-        + 'Any further questions or have an issue to report? Send me an email: ' + answers.email + '\n\n';
+// Create a function to initialize app
+function init() {
+  inquirer.prompt(questions).then((answers) => {
+    console.log("Generating your README...muahahahaha");
+    writeToFile("README.md", generateMarkdown({...answers})) // going to spread out all these answers inside this obj as our data
+  }) 
+}
 
-  fs.writeFileSync('README.txt', data);
-
-  console.log(`Answers written to README.txt`);
-});
+// Function call to initialize app
+init();
