@@ -1,7 +1,8 @@
+
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-var licenseChoices = [
+var licenseChoices = [ // add description here??
   {
     name: "MIT License",
     value: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
@@ -15,6 +16,7 @@ var licenseChoices = [
     value: "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)"
   }
 ];
+
 
 const questions = [
   {
@@ -58,7 +60,7 @@ const questions = [
     name: 'githubUser',
     message: 'What is your GitHub username, so users can be directed to your GitHub profile?'
   },
-  { // BEFORE EMAIL, PREFIX WITH "Any further questions or have an issue to report? Send me an email: "
+  {
     type: 'input',
     name: 'email',
     message: 'What is your email address?',
@@ -73,71 +75,21 @@ const questions = [
 ];
 
 
-// WHICH METHOD TO USE??? 
-
-inquirer.prompt(questions).then(answers => {
-// convert the answers object to a string
-const data = JSON.stringify(answers, null, 2); // ??
-// write answers to a file
-fs.writeFileSync('answers.json', data);
-    console.log('Answers written to answers.json');
-});
-
-
-// to prefix each answer with a title written to the README:
-    // We want section titles. First title = their 1st answer (title)
-    // Following sections titles are Description, Installation, Usage etc.
-
 inquirer.prompt(questions).then(answers => {
   let data = '';
-  data += 'Answer 1: ' + answers.name + '\n\n';
-  data += 'Answer 2: ' + answers.age + '\n\n';
-  data += 'Answer 3: ' + answers.location + '\n\n';
-  // write GitHub username to file, linking to their page:
-  data += '[Visit my GitHub](https://github.com/' + answers.githubUser + ')\n\n';
-    // TITLE ON LINE ABOVE ANSWER? --> data += 'Answer 3: \n' + answers.location + '\n\n';
-    // BOLD? WRAP IN ** --> data += 'Answer 3: **' + answers.location + '**\n\n';
-    // MD TITLE? USE #, ## etc --> data += '# ' + answers.location + '\n\n'; (= level 1 heading in md)
-  
+  data += answers.title + '\n\n';
+  data += '#Description \n' + answers.description + '\n\n'; // add license badge here?????
+  data += '#Installation \n' + answers.installation + '\n\n';
+  data += '#Usage \n' + answers.usage + '\n\n';
+  // data += '#License \n' + answers.*** + '\n\n'; // need to get descripts of licenses and add to this section***
+  data += '#Contributing \n' + answers.contributing + '\n\n';
+  data += '#Tests \n' + answers.tests + '\n\n';
+        // write GitHub username to file, linking to their page:
+  data += '#Contact Me \n' + '[Visit my GitHub](https://github.com/' + answers.githubUser + ')\n\n' 
+        // email:
+        + 'Any further questions or have an issue to report? Send me an email: ' + answers.email + '\n\n';
+
   fs.writeFileSync('README.txt', data);
 
   console.log(`Answers written to README.txt`);
 });
-
-
-
-// IF WE HAVE TO DO EACH PROMPT SEPARATELY, HERE'S ONE FOR LICENSE SECTION:
-var licenseChoices = [
-  {
-    name: "MIT License",
-    value: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
-  },
-  {
-    name: "Apache License 2.0",
-    value: "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"
-  },
-  {
-    name: "GPL License",
-    value: "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)"
-  }
-];
-
-inquirer
-  .prompt([
-    {
-      type: "list",
-      name: "license",
-      message: "Which type of license do you want to use?",
-      choices: licenseChoices
-    }
-  ])
-  .then(answers => {
-    fs.readFile("README.txt", "utf-8", (err, data) => {
-      if (err) throw err;
-      data = answers.license + '\n\n' + data;
-      fs.writeFile("README.txt", data, err => {
-        if (err) throw err;
-        console.log("Successfully added license badge to README.txt");
-      });
-    });
-  });
