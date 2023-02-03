@@ -35,7 +35,12 @@ ${data.description}
 
 ## Table of Contents
 
-TOC HERE
+* [Installation](#installation)
+* [Usage](#usage)
+${renderLicenseLink(data.license)}
+* [Contributing](#contributing)
+* [Tests](#tests)
+* [Questions](#questions)
 
 ## Installation
 
