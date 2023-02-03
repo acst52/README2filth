@@ -27,6 +27,45 @@ This project is licensed under the ${license} license.` // could link to opensou
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   return `# ${data.title}
+${renderLicenseBadge(data.license)}
+
+## Description
+
+${data.description}
+
+## Table of Contents
+
+TOC HERE
+
+## Installation
+
+To install necessary dependencies, run the following command: 
+\`\`\`
+${data.installation}
+\`\`\`
+
+## Usage
+
+${data.usage}
+
+${renderLicenseSection(data.license)}
+
+## Contributing
+
+${data.contributing}
+
+## Tests
+
+To perform tests, run the following command: 
+\`\`\`
+${data.tests}
+\`\`\`
+
+## Questions
+
+If you have any questions about this project, you can contact me at ${data.email}.
+
+You can find more of my work at [${data.githubUser}](https://github.com/${data.githubUser}/).
 
 `;
 }
