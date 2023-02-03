@@ -1,14 +1,10 @@
-// TODO:
-  // 1. generateMarkdown.js file + TOC
-  // 2. Get license icon to appear + add more licenses to [choices]
-  // 3. Email address validation
-  // 4. Esthetics
-
+// require statements to import modules:
 const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
 const generateMarkdown = require('./utils/generateMarkdown')
 
+// get questions into questions array of objects:
 const questions = [
   {
     type: 'input',
@@ -56,14 +52,7 @@ const questions = [
   {
     type: 'input',
     name: 'email',
-    message: 'What is your email address?',
-      validate: (input) => {
-        const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (emailRegex.test(input)) {
-          return true;
-        }
-        return 'Error in your email address!';
-      }
+    message: 'What is your email address?'
   }
 ];
 
