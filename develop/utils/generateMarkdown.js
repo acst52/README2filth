@@ -1,30 +1,27 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
+// function that returns license badge based on which license is passed in (that user chose). If no license, return empty string:
 function renderLicenseBadge(license) {
   if (license !== 'none') {
-    return `![license badge](https://img.shields.io/badge/license-${license}-brightgreen)` // creates badge from license passed to this fcn
+    return `![license badge](https://img.shields.io/badge/license-${license}-brightgreen)`
   } return "";
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
+// function that returns license link. If no license, return empty string:
 function renderLicenseLink(license) {
   if (license !== 'none') {
     return `* [License](#license)` // TOC link
   } return "";
 }
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
+// function that returns license section of README. If no license, return empty string:
 function renderLicenseSection(license) {
   if (license !== 'none') {
     return `## License
 
-This project is licensed under the ${license} license.` // could link to opensource.com/license for generic license... 
+This project is licensed under the ${license} license.`
   } return "";
 }
 
-// TODO: Create a function to generate markdown for README
+// function that generates md for README:
 function generateMarkdown(data) {
   return `# ${data.title}
 ${renderLicenseBadge(data.license)}
@@ -75,4 +72,5 @@ You can find more of my work at [${data.githubUser}](https://github.com/${data.g
 `;
 }
 
+// export this module to be imported in index.js:
 module.exports = generateMarkdown;
